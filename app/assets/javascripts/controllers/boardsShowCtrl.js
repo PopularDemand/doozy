@@ -6,4 +6,9 @@ doozy.controller('BoardsShowCtrl', ['$scope', 'board', 'lists', 'cards', 'listsS
 
   listsService.addCardsToLists(cards);
 
+  $scope.createList = function() {
+    $scope.newList.boardId = $scope.board.id;
+    listsService.createList($scope.newList);
+  }
+
 }])

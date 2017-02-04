@@ -15,7 +15,8 @@ class BoardsController < ApplicationController
   end
 
   def create
-    @board = current_user.boards.build(board_params)
+    @board = Board.new(board_params)
+    @board.users << current_user
     if @board.save
       respond_to do |format|
         format.json { render json: @board }

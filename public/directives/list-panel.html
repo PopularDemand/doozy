@@ -1,0 +1,19 @@
+<div class="col-xs-4 panel panel-default">
+  <h4 class='panel-heading'>{{ list.title }}</h4>
+  <div class="panel-body">
+    <ul>
+      <li ng-repeat='card in list.cards'>{{ card.name }}</li>
+    </ul>
+
+    <a ng-click='toggleForm()' ng-if='!formShowing' class='clickable'>Create New Card</a>
+
+    <form name='newCardForm' ng-submit='createCard()' ng-if='formShowing'>
+      <input type="text" ng-model='newCard.name' placeholder='name'>
+      <input type="text" ng-model='newCard.description' placeholder='description'>
+      <input type="number" ng-model='newCard.priority' placeholder='priority'>
+      <input type="submit" class='btn btn-sm btn-primary'>
+    </form>
+
+    <a ng-click='toggleForm()' ng-if='formShowing' class='clickable'>cancel</a>
+  </div>
+</div>

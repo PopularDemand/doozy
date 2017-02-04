@@ -13,13 +13,25 @@ doozy.factory('cardsService', ['Restangular', '$q', function(Restangular, $q) {
     for (var i = 0; i < lists.length; i++) {
       cardPromises.push(getCardsFromList(lists[i].id))
     }
+
     return $q.all(cardPromises).then(function() {
       return _cards
     })
   }
 
+  var createCard = function(cardParams) {
+    var listId = cardParams.listId;
+    return Restangular.one('lists', listId)
+      .all('cards')
+      .post({ card: cardParams })
+      .then(function(response) {
+        _cards[listId].push(response);
+      })
+  }
+
   return {
-    getCardsFromLists: getCardsFromLists
+    getCardsFromLists: getCardsFromLists,
+    createCard: createCard
   }
 
 }])

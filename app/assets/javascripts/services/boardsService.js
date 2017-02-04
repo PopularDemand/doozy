@@ -21,17 +21,16 @@ doozy.factory('boardsService', ['Restangular', function(Restangular) {
       });
   }
 
-  var createNewBoard = function(params) {
+  var createBoard = function(params) {
     return Restangular.all('boards').post({board: params}).then(function(response) {
         getBoards();
-        // TODO check for lag
         return response;
     });
   }
 
   return {
     getBoard: getBoard,
-    createNewBoard: createNewBoard,
+    createBoard: createBoard,
     getBoards: getBoards
   }
 
