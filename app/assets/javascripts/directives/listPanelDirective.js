@@ -8,6 +8,7 @@ doozy.directive('listPanel', ['cardsService', function(cardsService) {
     link: function(scope) {
 
       scope.formShowing = false;
+      scope.newCard = {};
 
       scope.createCard = function() {
         scope.newCard.listId = scope.list.id;

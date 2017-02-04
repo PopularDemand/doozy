@@ -7,7 +7,7 @@ doozy.config(['RestangularProvider',
   }]
 )
 
-doozy.config(function($stateProvider, $urlRouterProvider){
+doozy.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
   $urlRouterProvider.otherwise('/boards');
 
   $stateProvider
@@ -37,4 +37,4 @@ doozy.config(function($stateProvider, $urlRouterProvider){
         }
       }
     })
-})
+}])
