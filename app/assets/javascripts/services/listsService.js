@@ -16,7 +16,6 @@ doozy.factory('listsService', ['Restangular', function(Restangular) {
   }
 
   var createList = function(listParams) {
-    console.log('params', listParams)
     var boardId = listParams.boardId;
     return Restangular.one('boards', boardId).all('lists').post({ list: listParams })
       .then(function(list) {
