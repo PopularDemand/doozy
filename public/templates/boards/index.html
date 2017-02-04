@@ -1,0 +1,12 @@
+<h1>boards index</h1>
+<ul>
+  <li ng-repeat="board in boards">
+    <h3 ui-sref="show({id: board.id})">{{ board.title }}</h3>
+  </li>
+</ul>
+
+<h3>New Board:</h3>
+<form name='newBoardForm' ng-submit='createNewBoard()'>
+  <input type="text" ng-model='newBoard.title'>
+  <input type="submit" class='btn btn-primary'>
+</form>
