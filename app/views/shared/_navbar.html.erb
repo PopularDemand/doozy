@@ -14,7 +14,9 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <%= link_to "Logout", destroy_user_session_path, method: 'delete', class: 'navbar-text navbar-link' %>
+        <% if user_signed_in? %>
+          <%= link_to "Logout", destroy_user_session_path, method: 'delete', class: 'navbar-text navbar-link' %>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
