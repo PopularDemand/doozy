@@ -1,5 +1,7 @@
 class BoardsController < ApplicationController
 
+  before_action :set_board, only: [:show, :update]
+
   def index
     @boards = current_user.boards
     respond_to do |format|
@@ -8,7 +10,6 @@ class BoardsController < ApplicationController
   end
 
   def show
-    @board = Board.find(params[:id])
     respond_to do |format|
       format.json { render json: @board }
     end
@@ -23,7 +24,19 @@ class BoardsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.json { render json: { errors: @board.errors.full_messages } }
+        format.json { render json: { errors: @board.errors.full_messages }, status: 422 }
+      end
+    end
+  end
+
+  def update
+    if @board.update_attributes(board_params)
+      respond_to do |format|
+        format.json { render json: @board }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { errors: @board.errors.full_messages }, status: 422 }
       end
     end
   end
@@ -32,6 +45,10 @@ class BoardsController < ApplicationController
 
   def board_params
     params.require(:board).permit(:title)
+  end
+
+  def set_board
+    @board = Board.find(params[:id])
   end
 
 end
