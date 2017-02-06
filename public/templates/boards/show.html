@@ -1,4 +1,7 @@
-<h2>{{ board.title }}</h2>
+<h2 ng-if='!updateBoardFormShowing' ng-click='showUpdateBoard()'>{{ board.title }}</h2>
+
+<input type="text" id='updateBoardInput' ng-model='board.title' ng-if='updateBoardFormShowing' ng-blur='processBoardUpdate()'>
+
 <div class="row">
   <list-panel ng-repeat="list in lists" list='list'></list-panel>
 </div>

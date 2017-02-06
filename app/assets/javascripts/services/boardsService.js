@@ -11,6 +11,12 @@ doozy.factory('boardsService', ['Restangular', function(Restangular) {
     });
   }
 
+  var updateBoard = function(params) {
+    return _board.save().then(function(response) {
+      return response;
+    })
+  }
+
 
   // Index
   var getBoards = function() {
@@ -31,7 +37,8 @@ doozy.factory('boardsService', ['Restangular', function(Restangular) {
   return {
     getBoard: getBoard,
     createBoard: createBoard,
-    getBoards: getBoards
+    getBoards: getBoards,
+    updateBoard: updateBoard
   }
 
 }])

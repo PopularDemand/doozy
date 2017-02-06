@@ -23,9 +23,16 @@ doozy.factory('listsService', ['Restangular', function(Restangular) {
       })
   }
 
+  var updateList = function(list) {
+    return list.save().then(function(response) {
+      return response;
+    })
+  }
+
   return {
     getListsFromBoard: getListsFromBoard,
     addCardsToLists: addCardsToLists,
-    createList: createList
+    createList: createList,
+    updateList: updateList
   }
 }])

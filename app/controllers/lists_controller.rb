@@ -22,6 +22,19 @@ class ListsController < ApplicationController
     end
   end
 
+  def update
+    @list = List.find(params[:id])
+    if @list.update_attributes(list_params)
+      respond_to do |format|
+        format.json { render json: @list }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { errors: @list.errors.full_messages }, status: 422 }
+      end
+    end
+  end
+
   private
 
   def list_params

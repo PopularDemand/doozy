@@ -1,19 +1,24 @@
 <div class="col-xs-4 panel panel-default">
-  <h4 class='panel-heading'>{{ list.title }}</h4>
+
+  <h4 class='panel-heading' ng-if='!updateListFormShowing' ng-click='showUpdateList()'>{{ list.title }}</h4>
+
+  <input type="text" id='updateListInput' ng-model='list.title' ng-if='updateListFormShowing' ng-blur='processListUpdate()'>
+
+
   <div class="panel-body">
     <ul>
       <li ng-repeat='card in list.cards'>{{ card.name }}</li>
     </ul>
 
-    <a ng-click='toggleForm()' ng-if='!formShowing' class='clickable'>Create New Card</a>
+    <a ng-click='toggleNewCardForm()' ng-if='!newCardFormShowing' class='clickable'>Create New Card</a>
 
-    <form name='newCardForm' ng-submit='createCard()' ng-if='formShowing'>
+    <form name='newCardForm' ng-submit='createCard()' ng-if='newCardFormShowing'>
       <input type="text" ng-model='newCard.name' placeholder='name'>
       <input type="text" ng-model='newCard.description' placeholder='description'>
       <input type="number" ng-model='newCard.priority' placeholder='priority'>
       <input type="submit" class='btn btn-sm btn-primary'>
     </form>
 
-    <a ng-click='toggleForm()' ng-if='formShowing' class='clickable'>cancel</a>
+    <a ng-click='toggleNewCardForm()' ng-if='newCardFormShowing' class='clickable'>cancel</a>
   </div>
 </div>
