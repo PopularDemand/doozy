@@ -3,7 +3,7 @@ Board.destroy_all
 List.destroy_all
 Card.destroy_all
 
-NUM_USERS = 3
+NUM_USERS = 6
 BOARDS_PER_USER = 3
 LISTS_PER_BOARD = 3
 CARDS_PER_LIST = 3
@@ -36,6 +36,8 @@ Board.all.each do |board|
       title: Faker::GameOfThrones.house
     )
   end
+  member = User.all.sample
+  board.users << member unless board.users.include? member
 end
 
 puts 'creating cards'
@@ -46,7 +48,7 @@ List.all.each do |list|
       description: Faker::StarWars.wookie_sentence,
       priority: Faker::Number.between(1, 5)
     )
-    card.members << list.board.users.first
+    card.members = list.board.users
     card.save
   end
 end
