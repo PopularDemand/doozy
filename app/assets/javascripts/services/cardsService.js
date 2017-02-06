@@ -29,10 +29,26 @@ doozy.factory('cardsService', ['Restangular', '$q', function(Restangular, $q) {
       })
   }
 
-  var updateCard = function(card) {
+  var updateCard = function(params) {
+    var card = _findCard(params);
+    var prevCard = angular.copy(card, {});
+    angular.copy(params, card);
     return card.save().then(function(response) {
       return response;
+    }, function(error) {
+      angular.copy(prevCard, card);
+      return error.data;
     })
+  }
+
+  var _findCard = function(params) {
+    var listId = params.list_id;
+    for (var i = 0; i < _cards[listId].length; i++) {
+      if (_cards[listId][i].id === params.id) {
+        return _cards[listId][i];
+      }
+    }
+    return 'unable to locate card'
   }
 
   return {

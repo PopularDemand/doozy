@@ -10,12 +10,13 @@ doozy.directive('cardPanel', ['cardsService',
         scope.nameEditShowing = false;
         scope.descriptionEditShowing = false;
         scope.addMemberShowing = false;
+        scope.newCard = angular.copy(scope.card, {});
 
         scope.toggleCardCompletion = function() {
           if (scope.card.completed) {
-            scope.card.completed = null;
+            scope.newCard.completed = null;
           } else {
-            scope.card.completed = new Date();
+            scope.newCard.completed = new Date();
           }
           scope.processCardUpdate();
         }
@@ -29,7 +30,12 @@ doozy.directive('cardPanel', ['cardsService',
         }
 
         scope.processCardUpdate = function() {
-          cardsService.updateCard(scope.card);
+          cardsService.updateCard(scope.newCard)
+            .then(function() {
+              angular.copy(scope.card, scope.newCard);
+            }, function(error){
+              //
+            });
           _hideFields();
         }
 

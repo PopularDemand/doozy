@@ -8,7 +8,7 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="myModalLabel" ng-if='!nameEditShowing' ng-click='toggleNameEdit()'>{{ card.name }}</h4>
-          <input ng-model='card.name' ng-if='nameEditShowing' ng-blur='processCardUpdate()'>
+          <input ng-model='newCard.name' ng-if='nameEditShowing' ng-blur='processCardUpdate()'>
         </div>
         <div class="modal-body">
 
@@ -33,7 +33,7 @@
                 <p>{{ card.description }}</p>
                 <a ng-click='toggleDescriptionEdit()'>Edit the description</a>
               </div>
-              <textarea class='form-control' ng-if='descriptionEditShowing' ng-model='card.description' ng-blur='processCardUpdate()'></textarea>
+              <textarea class='form-control' ng-if='descriptionEditShowing' ng-model='newCard.description' ng-blur='processCardUpdate()'></textarea>
             </div>
           </div>
           <hr>

@@ -26,9 +26,12 @@ doozy.factory('listsService', ['Restangular', function(Restangular) {
   var updateList = function(params) {
     var list = _findList(params);
     var prevList = angular.copy(list, {});
-    angular.copy(prevList, list);
+    angular.copy(params, list);
 
-    return list.save().then(_returnSuccess, _handleReject);
+    return list.save().then(_returnSuccess, function(error) {
+    angular.copy(prevList, list);
+    return error.data;
+  });
   }
 
   var _findList = function(params) {

@@ -24,9 +24,12 @@ doozy.controller('BoardsShowCtrl', ['$scope', 'board', 'lists', 'cards', 'boards
 
   $scope.processBoardUpdate = function() {
     boardsService.updateBoard($scope.newBoard)
-      // .then(_, _setErrors);
+      .then(function(response) {
+        angular.copy($scope.board, $scope.newBoard);
+      }, function() {
+        // set errors
+      });
     $scope._toggleUpdateBoardShow();
-    angular.copy($scope.board, $scope.newBoard);
   }
 
 }])
