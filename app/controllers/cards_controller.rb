@@ -4,7 +4,7 @@ class CardsController < ApplicationController
     @list = List.find(params[:list_id])
     @cards = @list.cards
     respond_to do |format|
-      format.json { render json: @cards.to_json(include: [:members, {list: { only: :title }} ]) }
+      format.json { render json: @cards.to_json(include: [:members, {list: { only: [:title], include: :members }} ]) }
     end
   end
 
@@ -12,6 +12,19 @@ class CardsController < ApplicationController
     @list = List.find(params[:list_id])
     @card = @list.cards.build(card_params)
     if @card.save
+      respond_to do |format|
+        format.json { render json: @card }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { errors: @card.errors.full_messages } }
+      end
+    end
+  end
+
+  def update
+    @card = Card.find(params[:id])
+    if @card.update_attributes(card_params)
       respond_to do |format|
         format.json { render json: @card }
       end

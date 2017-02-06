@@ -29,9 +29,16 @@ doozy.factory('cardsService', ['Restangular', '$q', function(Restangular, $q) {
       })
   }
 
+  var updateCard = function(card) {
+    return card.save().then(function(response) {
+      return response;
+    })
+  }
+
   return {
     getCardsFromLists: getCardsFromLists,
-    createCard: createCard
+    createCard: createCard,
+    updateCard: updateCard
   }
 
 }])

@@ -1,34 +1,44 @@
 <div class="card">
 
-  <h4 ng-if='!updateCardFormShowing' ng-click='showUpdateCard()' data-toggle="modal" data-target="#myModal">{{ card.name }}</h4>
+  <h4 data-toggle="modal" data-target="#card-{{card.id}}-modal">{{ card.name }}</h4>
 
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="card-{{card.id}}-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">{{ card.name }}</h4>
+          <h4 class="modal-title" id="myModalLabel" ng-if='!nameEditShowing' ng-click='toggleNameEdit()'>{{ card.name }}</h4>
+          <input ng-model='card.name' ng-if='nameEditShowing' ng-blur='processCardUpdate()'>
         </div>
         <div class="modal-body">
+
+          <!-- meta -->
           <div class="row">
             <div class="col-xs-12">
               <div class="list-info pull-left">
                 <span>In list: {{ card.list.title }}</span>
               </div>
               <div class="completion-options pull-right">
-                <a ng-if='!!card.completed' ng-click=''>Mark Incomplete</a>
-                <a ng-if='!card.completed' ng-click=''>Mark Completed</a>
+                <a ng-if='!!card.completed' ng-click='toggleCardCompletion()'>Mark Incomplete</a>
+                <a ng-if='!card.completed' ng-click='toggleCardCompletion()'>Mark Completed</a>
               </div>
             </div>
           </div>
           <hr>
+
+          <!-- description -->
           <div class="row">
             <div class="col-xs-12">
-              <p>{{ card.description }}</p>
-              <a ng-click=''>Edit the description</a>
+              <div ng-if='!descriptionEditShowing'>
+                <p>{{ card.description }}</p>
+                <a ng-click='toggleDescriptionEdit()'>Edit the description</a>
+              </div>
+              <textarea class='form-control' ng-if='descriptionEditShowing' ng-model='card.description' ng-blur='processCardUpdate()'></textarea>
             </div>
           </div>
           <hr>
+
+          <!-- members -->
           <div class="row">
             <div class="col-xs-12">
               <h2>Members</h2>
@@ -36,10 +46,15 @@
                 <span>{{ member.first_name + ' ' + member.last_name }}</span>
                 <a ng-click='' class='pull-right'>remove</a>
               </div>
+              <ul ng-repeat='member in card.list.members'>
+                {{ member.first_name }}
+              </ul>
               <a ng-click=''>Add Member</a>
             </div>
           </div>
           <hr>
+
+          <!-- activities -->
           <div class="row">
             <div class="col-xs-12">
               <h2>Activity</h2>

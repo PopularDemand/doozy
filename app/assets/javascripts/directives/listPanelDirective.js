@@ -30,7 +30,7 @@ doozy.directive('listPanel', ['cardsService', 'listsService', function(cardsServ
       scope.createCard = function() {
         scope.newCard.listId = scope.list.id;
         cardsService.createCard(scope.newCard)
-          .then(_clearForm);
+          .then(_clearNewCardForm);
       }
 
       scope.toggleNewCardForm = function() {

@@ -9,4 +9,6 @@ class User < ApplicationRecord
   has_many :cardsusers, dependent: :destroy
   has_many :cards, through: :cardsusers
 
+  has_many :lists, through: :boards
+
 end
