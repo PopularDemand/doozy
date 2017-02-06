@@ -41,10 +41,12 @@ end
 puts 'creating cards'
 List.all.each do |list|
   CARDS_PER_LIST.times do
-    list.cards.create(
+    card = list.cards.create(
       name: Faker::GameOfThrones.character,
       description: Faker::StarWars.wookie_sentence,
       priority: Faker::Number.between(1, 5)
     )
+    card.members << list.board.users.first
+    card.save
   end
 end

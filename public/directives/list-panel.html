@@ -6,9 +6,8 @@
 
 
   <div class="panel-body">
-    <ul>
-      <li ng-repeat='card in list.cards'>{{ card.name }}</li>
-    </ul>
+
+    <card-panel ng-repeat='card in list.cards' card='card'></card-panel>
 
     <a ng-click='toggleNewCardForm()' ng-if='!newCardFormShowing' class='clickable'>Create New Card</a>
 

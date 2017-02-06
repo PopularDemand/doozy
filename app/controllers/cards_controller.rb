@@ -4,7 +4,7 @@ class CardsController < ApplicationController
     @list = List.find(params[:list_id])
     @cards = @list.cards
     respond_to do |format|
-      format.json { render json: @cards }
+      format.json { render json: @cards.to_json(include: [:members, {list: { only: :title }} ]) }
     end
   end
 
