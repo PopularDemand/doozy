@@ -23,10 +23,30 @@ doozy.factory('listsService', ['Restangular', function(Restangular) {
       })
   }
 
-  var updateList = function(list) {
-    return list.save().then(function(response) {
-      return response;
-    })
+  var updateList = function(params) {
+    var list = _findList(params);
+    var prevList = angular.copy(list, {});
+    angular.copy(prevList, list);
+
+    return list.save().then(_returnSuccess, _handleReject);
+  }
+
+  var _findList = function(params) {
+    for (var i = 0; i < _lists.length; i++) {
+      if (_lists[i].id === params.id) {
+        return _lists[i];
+      }
+    }
+    return 'unable to locate list';
+  }
+
+  var _returnSuccess = function(response) {
+    return response;
+  }
+
+  var _handleReject = function(error) {
+    angular.copy(prevList, list);
+    return error.data;
   }
 
   return {

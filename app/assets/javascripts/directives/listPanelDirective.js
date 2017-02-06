@@ -8,6 +8,7 @@ doozy.directive('listPanel', ['cardsService', 'listsService', function(cardsServ
     link: function(scope) {
 
       scope.newCard = {};
+      scope.newList  = angular.copy(scope.list, {});
       scope.newCardFormShowing = false;
       scope.updateListFormShowing = false;
 
@@ -21,9 +22,12 @@ doozy.directive('listPanel', ['cardsService', 'listsService', function(cardsServ
       }
 
       scope.processListUpdate = function() {
-        listsService.updateList(scope.list)
+        listsService.updateList(scope.newList)
           .then(function() {
             _toggleUpdateListForm();
+            angular.copy(scope.list, scope.newList);
+          }, function(errors) {
+            //
           });
       }
 

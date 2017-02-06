@@ -2,7 +2,7 @@
 
   <h4 class='panel-heading' ng-if='!updateListFormShowing' ng-click='showUpdateList()'>{{ list.title }}</h4>
 
-  <input type="text" id='updateListInput' ng-model='list.title' ng-if='updateListFormShowing' ng-blur='processListUpdate()'>
+  <input type="text" id='updateListInput' ng-model='newList.title' ng-if='updateListFormShowing' ng-blur='processListUpdate()'>
 
 
   <div class="panel-body">

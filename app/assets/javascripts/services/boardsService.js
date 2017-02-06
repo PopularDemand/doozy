@@ -12,8 +12,13 @@ doozy.factory('boardsService', ['Restangular', function(Restangular) {
   }
 
   var updateBoard = function(params) {
+    var prevBoard = angular.copy(_board, {});
+    angular.copy(params, _board);
     return _board.save().then(function(response) {
       return response;
+    }, function(error){
+      angular.copy(prevBoard, _board);
+      return error.data;
     })
   }
 

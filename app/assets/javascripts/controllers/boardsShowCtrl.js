@@ -1,6 +1,7 @@
 doozy.controller('BoardsShowCtrl', ['$scope', 'board', 'lists', 'cards', 'boardsService', 'listsService', function($scope, board, lists, cards, boardsService, listsService) {
 
   $scope.board = board;
+  $scope.newBoard = angular.copy($scope.board, {});
   $scope.lists = lists;
   $scope.cards = cards;
   $scope.updateBoardFormShowing = false;
@@ -22,8 +23,10 @@ doozy.controller('BoardsShowCtrl', ['$scope', 'board', 'lists', 'cards', 'boards
   }
 
   $scope.processBoardUpdate = function() {
-    boardsService.updateBoard($scope.board);
+    boardsService.updateBoard($scope.newBoard)
+      // .then(_, _setErrors);
     $scope._toggleUpdateBoardShow();
+    angular.copy($scope.board, $scope.newBoard);
   }
 
 }])
