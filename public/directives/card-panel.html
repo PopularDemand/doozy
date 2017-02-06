@@ -44,12 +44,12 @@
               <h2>Members</h2>
               <div class="member-row" ng-repeat='member in card.members'>
                 <span>{{ member.first_name + ' ' + member.last_name }}</span>
-                <a ng-click='' class='pull-right'>remove</a>
+                <a ng-click='toggleMember(member.id)' class='pull-right'>remove</a>
               </div>
-              <ul ng-repeat='member in card.list.members'>
-                {{ member.first_name }}
-              </ul>
-              <a ng-click=''>Add Member</a>
+              <select ng-options='member as member.first_name for member in card.list.members track by member.id' ng-model='newMember' >
+                <option value=""></option>
+              </select>
+              <a ng-click='toggleMember(newMember.id)'>Add Member</a>
             </div>
           </div>
           <hr>

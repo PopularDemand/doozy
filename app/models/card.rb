@@ -8,4 +8,15 @@ class Card < ApplicationRecord
     through: :cardsusers,
     source: :user
 
+  def update_membership(id)
+    return if !id
+    puts 'adfkajsdfjasldfjalskjdf;lajksdf;jas;dlfj'
+    member = User.find(id)
+    if self.members.include?(member)
+      self.members.delete(member)
+    else
+      self.members << member
+    end
+  end
+
 end

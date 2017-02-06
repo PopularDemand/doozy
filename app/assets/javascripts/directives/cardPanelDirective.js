@@ -39,10 +39,26 @@ doozy.directive('cardPanel', ['cardsService',
           _hideFields();
         }
 
+        scope.toggleMember = function(memberId) {
+          _addOrRemoveMember(memberId);
+          scope.newCard.relavant_member = memberId;
+          scope.processCardUpdate();
+        }
+
+        var _addOrRemoveMember = function(id) {
+          for (var i = 0; i < scope.newCard.members.length; i++) {
+            if (scope.newCard.members.length && scope.newCard.members[i].id === id) {
+              return scope.newCard.members.splice(i, 1);
+            }
+          }
+          return scope.newCard.members.push(scope.newMember);
+        }
+
         var _hideFields = function() {
           scope.nameEditShowing = false;
           scope.descriptionEditShowing = false;
           scope.addMemberShowing = false;
+          scope.newMember = '';
         }
       }
     }
