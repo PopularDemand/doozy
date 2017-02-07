@@ -1,3 +1,67 @@
 // Place all the styles related to the boards controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.board-grid {
+  .board-panel {
+    display: inline-block;
+    width: 100%;
+    background-color: #4C74A5;
+    box-shadow: 2px 2px 1px #888;
+    height: 120px;
+    margin-bottom: 50px;
+    border-radius: 20px;
+    color: #eee;
+    .board-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    &:hover .board-title {
+      font-size: 28px;
+      font-height: 700;
+      color: #fff;
+      background-color: #38587B;
+    }
+  }
+  .board-form-panel {
+    padding: 0 20px;
+    input[type=text] {
+      color: #000;
+    }
+    border: 3px solid 
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+}
+
+#board {
+  .header-group {
+    margin-bottom: 25px;
+    margin-right: 25px;
+    display: inline-block;
+    font-size: 32px;
+    input.form-control {
+      font-size: 32px;
+    }
+  }
+  .board-header {
+    font-size: 32px;
+    font-weight: 700;
+  }
+  .tagline-group {
+    display: inline-block;
+    width: 33%;
+    input {
+      width: 100%;
+    }
+  }
+  .tagline {
+    color: #aaa;
+    font-style: italic;
+  }
+  .board-desc-input {
+    width: 15%;
+  }
+}

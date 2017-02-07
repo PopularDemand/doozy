@@ -1,5 +1,5 @@
-doozy.directive('cardPanel', ['cardsService',
-  function(cardsService){
+doozy.directive('cardPanel', ['cardsService', '$timeout',
+  function(cardsService, $timeout){
     return {
       restrict: 'E',
       templateUrl: 'directives/card-panel.html',
@@ -21,14 +21,21 @@ doozy.directive('cardPanel', ['cardsService',
           scope.processCardUpdate();
         }
 
-        scope.toggleNameEdit = function() {
-          scope.nameEditShowing = !scope.nameEditShowing;
+        scope.showNameEdit = function() {
+          _toggleNameEdit();
+          $timeout(function() {
+            _focusInput('#name-input');
+          })
         }
 
-        scope.toggleDescriptionEdit = function() {
-          scope.descriptionEditShowing = !scope.descriptionEditShowing;
-        }
 
+        scope.showDescriptionEdit = function() {
+          _toggleDescriptionEdit();
+          $timeout(function() {
+            _focusInput('#desc-input');
+          })
+        }
+        
         scope.processCardUpdate = function() {
           cardsService.updateCard(scope.newCard)
             .then(function() {
@@ -41,17 +48,30 @@ doozy.directive('cardPanel', ['cardsService',
 
         scope.toggleMember = function(memberId) {
           _addOrRemoveMember(memberId);
-          scope.newCard.relavant_member = memberId;
+          scope.newCard.relevant_member = memberId;
           scope.processCardUpdate();
         }
 
         var _addOrRemoveMember = function(id) {
           for (var i = 0; i < scope.newCard.members.length; i++) {
             if (scope.newCard.members.length && scope.newCard.members[i].id === id) {
-              return scope.newCard.members.splice(i, 1);
+              scope.newCard.members.splice(i, 1);
+              return;
             }
           }
-          return scope.newCard.members.push(scope.newMember);
+          scope.newCard.members.push(scope.newMember);
+        }
+
+        var _toggleNameEdit = function() {
+          scope.nameEditShowing = !scope.nameEditShowing;
+        }
+
+        var _toggleDescriptionEdit = function() {
+          scope.descriptionEditShowing = !scope.descriptionEditShowing;
+        }
+
+        var _focusInput = function(selector) {
+          angular.element(selector).focus();
         }
 
         var _hideFields = function() {

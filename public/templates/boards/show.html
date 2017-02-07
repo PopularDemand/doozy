@@ -1,12 +1,26 @@
-<h2 ng-if='!updateBoardFormShowing' ng-click='showUpdateBoard()'>{{ board.title }}</h2>
-
-<input type="text" id='updateBoardInput' ng-model='newBoard.title' ng-if='updateBoardFormShowing' ng-blur='processBoardUpdate()'>
-
-<div class="row">
-  <list-panel ng-repeat="list in lists" list='list'></list-panel>
+<div id="board">
+  
+  <!-- title -->
+  <div class="header-group">
+    <h2 ng-if='!updateBoardTitleShowing' ng-click='showUpdateBoardTitle()' class='board-header'>{{ board.title }}</h2>
+    
+    <input type="text" id='board-title' ng-model='newBoard.title' ng-if='updateBoardTitleShowing' ng-blur='processBoardUpdate()' class='form-control'>
+  </div>
+  
+  <!-- tagline -->
+  <div class="tagline-group">
+    <p class="tagline" ng-if='!updateBoardDescShowing' ng-click='showUpdateBoardDesc()'>{{ board.description || 'Add a description to this board...' }}</p>
+    <input type='text' ng-model='newBoard.description' ng-if='updateBoardDescShowing' ng-blur='processBoardUpdate()' class='form-control board-desc-input' id='board-desc'>
+  </div>
+  
+  
+  <!-- list-grid -->
+  <div class="row">
+    <list-panel ng-repeat="list in lists" list='list'></list-panel>
+  </div>
+  
+  <form name='newListForm' ng-submit='createList()' class='form'>
+    <input type="text" ng-model='newList.title'>
+    <input type="submit" class='btn btn-primary'>
+  </form>
 </div>
-
-<form name='newListForm' ng-submit='createList()' class='form'>
-  <input type="text" ng-model='newList.title'>
-  <input type="submit" class='btn btn-primary'>
-</form>

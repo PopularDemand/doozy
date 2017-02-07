@@ -1,4 +1,4 @@
-doozy.directive('listPanel', ['cardsService', 'listsService', function(cardsService, listsService) {
+doozy.directive('listPanel', ['cardsService', 'listsService', '$timeout', function(cardsService, listsService, $timeout) {
   return {
     restrict: 'E',
     templateUrl: 'directives/list-panel.html',
@@ -12,13 +12,12 @@ doozy.directive('listPanel', ['cardsService', 'listsService', function(cardsServ
       scope.newCardFormShowing = false;
       scope.updateListFormShowing = false;
 
-      var _toggleUpdateListForm = function() {
-        scope.updateListFormShowing = !scope.updateListFormShowing
-      }
 
       scope.showUpdateList = function() {
         _toggleUpdateListForm();
-        // TODO focus input
+        $timeout(function() {
+          angular.element('#updateListInput').focus();
+        });
       }
 
       scope.processListUpdate = function() {

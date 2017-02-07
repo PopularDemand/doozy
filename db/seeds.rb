@@ -24,7 +24,8 @@ puts 'creating boards'
 User.all.each do |user|
   BOARDS_PER_USER.times do |num|
     user.boards.create(
-      title: Faker::Hipster.word.capitalize
+      title: Faker::Hipster.word.capitalize,
+      description: Faker::Hacker.say_something_smart
     )
   end
 end

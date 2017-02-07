@@ -1,10 +1,11 @@
-doozy.controller('BoardsShowCtrl', ['$scope', 'board', 'lists', 'cards', 'boardsService', 'listsService', function($scope, board, lists, cards, boardsService, listsService) {
+doozy.controller('BoardsShowCtrl', ['$scope', 'board', 'lists', 'cards', 'boardsService', 'listsService', '$timeout', function($scope, board, lists, cards, boardsService, listsService, $timeout) {
 
   $scope.board = board;
   $scope.newBoard = angular.copy($scope.board, {});
   $scope.lists = lists;
   $scope.cards = cards;
-  $scope.updateBoardFormShowing = false;
+  $scope.updateBoardTitleShowing = false;
+  $scope.updateBoardDescShowing = false;
 
   listsService.addCardsToLists(cards);
 
@@ -13,13 +14,26 @@ doozy.controller('BoardsShowCtrl', ['$scope', 'board', 'lists', 'cards', 'boards
     listsService.createList($scope.newList);
   }
 
-  $scope.showUpdateBoard = function() {
-    $scope._toggleUpdateBoardShow();
-    // TODO focus the input
+  $scope.showUpdateBoardTitle = function() {
+    $scope._toggleUpdateBoardTitle();
+    $timeout(function() {
+      _focusInput('#board-title');
+    })
   }
 
-  $scope._toggleUpdateBoardShow = function() {
-    $scope.updateBoardFormShowing = !$scope.updateBoardFormShowing;
+  $scope.showUpdateBoardDesc = function() {
+    $scope._toggleUpdateBoardDesc();
+    $timeout(function() {
+      _focusInput('#board-desc');
+    })
+  }
+  
+  $scope._toggleUpdateBoardTitle = function() {
+    $scope.updateBoardTitleShowing = !$scope.updateBoardTitleShowing;
+  }
+
+  $scope._toggleUpdateBoardDesc = function() {
+    $scope.updateBoardDescShowing = !$scope.updateBoardDescShowing;
   }
 
   $scope.processBoardUpdate = function() {
@@ -29,7 +43,16 @@ doozy.controller('BoardsShowCtrl', ['$scope', 'board', 'lists', 'cards', 'boards
       }, function() {
         // set errors
       });
-    $scope._toggleUpdateBoardShow();
+    _closeInputs();
+  }
+
+  var _closeInputs = function() {
+    $scope.updateBoardTitleShowing = false;
+    $scope.updateBoardDescShowing = false;
+  }
+
+  var _focusInput = function(selector) {
+    angular.element(selector).focus();
   }
 
 }])

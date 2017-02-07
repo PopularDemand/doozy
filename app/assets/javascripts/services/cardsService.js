@@ -25,6 +25,9 @@ doozy.factory('cardsService', ['Restangular', '$q', function(Restangular, $q) {
       .all('cards')
       .post({ card: cardParams })
       .then(function(response) {
+        if (!_cards[listId]) {
+          _cards[listId] = [];
+        }
         _cards[listId].push(response);
       })
   }
