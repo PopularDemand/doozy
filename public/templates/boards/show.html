@@ -16,7 +16,9 @@
   
   <!-- list-grid -->
   <div class="row">
-    <list-panel ng-repeat="list in lists" list='list'></list-panel>
+    <div class="list-grid">
+      <list-panel ng-repeat="list in lists" list='list'></list-panel>
+    </div>
   </div>
   
   <form name='newListForm' ng-submit='createList()' class='form'>

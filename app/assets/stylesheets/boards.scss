@@ -1,7 +1,5 @@
-// Place all the styles related to the boards controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 
+// Index
 .board-grid {
   .board-panel {
     display: inline-block;
@@ -36,6 +34,8 @@
   }
 }
 
+
+// Show
 #board {
   .header-group {
     margin-bottom: 25px;
@@ -63,5 +63,27 @@
   }
   .board-desc-input {
     width: 15%;
+  }
+}
+
+.list-grid {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  width: 100%;
+  // align-content: space-between;
+  .list-panel {
+    width: 250px;
+    height: 500px;
+    margin: 0 15px;
+  }
+  .block-link {
+    float: right;
+    font-size: 12px;
+    &:hover {
+      background-color: #4c74a5;
+      color: #eee;
+      text-decoration: none;
+    }
   }
 }

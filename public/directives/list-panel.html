@@ -1,23 +1,31 @@
-<div class="col-xs-4 panel panel-default">
+<div class=" list-panel panel panel-default">
 
-  <h4 class='panel-heading' ng-if='!updateListFormShowing' ng-click='showUpdateList()'>{{ list.title }}</h4>
+  <div class="panel-heading">
+    <h4 ng-if='!updateListFormShowing' ng-click='showUpdateList()'>{{ list.title }}</h4>
 
-  <input type="text" id='updateListInput' ng-model='newList.title' ng-if='updateListFormShowing' ng-blur='processListUpdate()'>
+    <input type="text" id='updateListInput' ng-model='newList.title' ng-if='updateListFormShowing' ng-blur='processListUpdate()' class='form-control'>
+  </div>
 
 
   <div class="panel-body">
+    <div class="card-grid">
 
-    <card-panel ng-repeat='card in list.cards' card='card'></card-panel>
+      <div class="row">
+        <div class="col-xs-12">
+          <a ng-click='toggleNewCardForm()' ng-if='!newCardFormShowing' class='clickable block-link'>&#43; New Card</a>
+        </div>
+      </div>
 
-    <a ng-click='toggleNewCardForm()' ng-if='!newCardFormShowing' class='clickable'>Create New Card</a>
+      <form name='newCardForm' ng-submit='createCard()' ng-if='newCardFormShowing'>
+        <input type="text" ng-model='newCard.name' placeholder='name'>
+        <input type="text" ng-model='newCard.description' placeholder='description'>
+        <input type="number" ng-model='newCard.priority' placeholder='priority'>
+        <input type="submit" class='btn btn-sm btn-primary'>
+      </form>
 
-    <form name='newCardForm' ng-submit='createCard()' ng-if='newCardFormShowing'>
-      <input type="text" ng-model='newCard.name' placeholder='name'>
-      <input type="text" ng-model='newCard.description' placeholder='description'>
-      <input type="number" ng-model='newCard.priority' placeholder='priority'>
-      <input type="submit" class='btn btn-sm btn-primary'>
-    </form>
+      <a ng-click='toggleNewCardForm()' ng-if='newCardFormShowing' class='clickable'>cancel</a>
 
-    <a ng-click='toggleNewCardForm()' ng-if='newCardFormShowing' class='clickable'>cancel</a>
+      <card-panel ng-repeat='card in list.cards' card='card'></card-panel>
+    </div>
   </div>
 </div>
