@@ -12,6 +12,12 @@ doozy.directive('listPanel', ['cardsService', 'listsService', '$timeout', functi
       scope.newCardFormShowing = false;
       scope.updateListFormShowing = false;
 
+      scope.moveCard = function(card) {
+        var cardId = parseInt(card.id);
+        var prevList = parseInt(card.dataset.parentId)
+        cardsService.changeList(cardId, prevList, scope.list.id);
+      }
+
 
       scope.showUpdateList = function() {
         _toggleUpdateListForm();

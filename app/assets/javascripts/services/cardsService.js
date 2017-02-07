@@ -32,6 +32,19 @@ doozy.factory('cardsService', ['Restangular', '$q', function(Restangular, $q) {
       })
   }
 
+  var changeList = function(cardId, prevList, newList) {
+    var prevParams = {
+      id: cardId,
+      list_id: prevList
+    }
+    var card = _findCard(prevParams)
+
+    card.list_id = newList;
+    card.save().then(function(results) {
+      _updateCards(prevParams, newList);
+    })
+  }
+
   var updateCard = function(params) {
     var card = _findCard(params);
     var prevCard = angular.copy(card, {});
@@ -42,6 +55,13 @@ doozy.factory('cardsService', ['Restangular', '$q', function(Restangular, $q) {
       angular.copy(prevCard, card);
       return error.data;
     })
+  }
+
+  var _updateCards = function(prevParams, newList) {
+    // console.log(prevParams)
+    // console.log(_cards[prevParams.list_id])
+    getCardsFromList(newList)
+    getCardsFromList(prevParams.list_id)
   }
 
   var _findCard = function(params) {
@@ -57,7 +77,8 @@ doozy.factory('cardsService', ['Restangular', '$q', function(Restangular, $q) {
   return {
     getCardsFromLists: getCardsFromLists,
     createCard: createCard,
-    updateCard: updateCard
+    updateCard: updateCard,
+    changeList: changeList
   }
 
 }])

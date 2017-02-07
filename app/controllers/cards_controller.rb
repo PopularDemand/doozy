@@ -25,6 +25,7 @@ class CardsController < ApplicationController
   def update
     @card = Card.find(params[:id])
     @card.update_membership(params[:relevant_member])
+    @card.change_list(params[:list_id])
     if @card.update_attributes(card_params)
       respond_to do |format|
         format.json { render json: @card }
@@ -39,6 +40,6 @@ class CardsController < ApplicationController
   private
 
   def card_params
-    params.require(:card).permit(:name, :description, :priority, :completed, :relevant_member)
+    params.require(:card).permit(:name, :description, :priority, :completed, :relevant_member, :list_id)
   end
 end

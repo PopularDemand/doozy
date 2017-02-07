@@ -88,10 +88,10 @@ doozy.directive('cardPanel', ['cardsService', '$timeout',
           scope.newMember = '';
         }
 
-        scope.toggleDescription = function() {
-          console.log(scope.showDescription)
-          scope.showDescription = !scope.showDescription;
-        }
+        // scope.toggleDescription = function() {
+        //   console.log(scope.showDescription)
+        //   scope.showDescription = !scope.showDescription;
+        // }
       }
     }
   }])
