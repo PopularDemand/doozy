@@ -2,4 +2,6 @@
 
 Project management for teams and individuals
 
-Build with: [John Popenuk](https://github.com/popenuj)
+Sign up now at: [Doozy Project Management](http://doozypm.herokuapp.com)
+
+Contributing partner: [John Popenuk](https://github.com/popenuj)
