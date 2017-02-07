@@ -18,7 +18,6 @@ doozy.directive('listPanel', ['cardsService', 'listsService', '$timeout', functi
         cardsService.changeList(cardId, prevList, scope.list.id);
       }
 
-
       scope.showUpdateList = function() {
         _toggleUpdateListForm();
         $timeout(function() {
@@ -40,6 +39,10 @@ doozy.directive('listPanel', ['cardsService', 'listsService', '$timeout', functi
         scope.newCard.listId = scope.list.id;
         cardsService.createCard(scope.newCard)
           .then(_clearNewCardForm);
+      }
+
+      scope.deleteList = function() {
+        listsService.deleteList(scope.list);
       }
 
       scope.toggleNewCardForm = function() {

@@ -24,3 +24,12 @@ body {
   // a draggable item has entered
   background-color: red;
 }
+
+.delete-x {
+  color: #bbb;
+  font-size: 10px;
+  &:hover {
+    background-color: #ddd;
+    color: red;
+  }
+}

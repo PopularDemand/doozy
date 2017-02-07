@@ -1,5 +1,7 @@
 class ListsController < ApplicationController
 
+  before_action :set_list, only: [:update, :destroy]
+
   def index
     @board = Board.find(params[:board_id])
     @lists = @board.lists
@@ -23,7 +25,6 @@ class ListsController < ApplicationController
   end
 
   def update
-    @list = List.find(params[:id])
     if @list.update_attributes(list_params)
       respond_to do |format|
         format.json { render json: @list }
@@ -35,7 +36,18 @@ class ListsController < ApplicationController
     end
   end
 
+  def destroy
+    @list.delete
+    respond_to do |format|
+      format.json { render json: @list }
+    end
+  end
+
   private
+
+  def set_list
+    @list = List.find(params[:id])
+  end
 
   def list_params
     params.require(:list).permit(:title)

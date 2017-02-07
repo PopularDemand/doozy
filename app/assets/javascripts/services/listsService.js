@@ -24,6 +24,16 @@ doozy.factory('listsService', ['Restangular', function(Restangular) {
     }
   }
 
+  var deleteList = function(list) {
+    list.remove();
+    for(var i = 0; i < _lists.length; i++) {
+      if (_lists[i].id === list.id) {
+        _lists.splice(i, 1);
+        break;
+      }
+    }
+  }
+
   // var swapCard = function(prevList, card) {
   //   console.log(prevList)
   //   console.log(_lists)
@@ -93,6 +103,7 @@ doozy.factory('listsService', ['Restangular', function(Restangular) {
     addCardsToLists: addCardsToLists,
     createList: createList,
     updateList: updateList,
+    deleteList: deleteList,
     removeCard: removeCard
   }
 }])

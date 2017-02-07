@@ -19,30 +19,13 @@ doozy.directive('cardPanel', ['cardsService', '$timeout',
         // element.on('mouseout', _toggleDescription);
 
 
-        scope.toggleCardCompletion = function() {
-          if (scope.card.completed) {
-            scope.newCard.completed = null;
-          } else {
-            scope.newCard.completed = new Date();
-          }
-          scope.processCardUpdate();
+
+        // CRUD
+
+        scope.deleteCard = function() {
+          cardsService.deleteCard(scope.card)
         }
 
-        scope.showNameEdit = function() {
-          _toggleNameEdit();
-          $timeout(function() {
-            _focusInput('#name-input');
-          })
-        }
-
-
-        scope.showDescriptionEdit = function() {
-          _toggleDescriptionEdit();
-          $timeout(function() {
-            _focusInput('#desc-input');
-          })
-        }
-        
         scope.processCardUpdate = function() {
           cardsService.updateCard(scope.newCard)
             .then(function() {
@@ -67,6 +50,32 @@ doozy.directive('cardPanel', ['cardsService', '$timeout',
             }
           }
           scope.newCard.members.push(scope.newMember);
+        }
+
+
+        // Editable Fields
+        scope.toggleCardCompletion = function() {
+          if (scope.card.completed) {
+            scope.newCard.completed = null;
+          } else {
+            scope.newCard.completed = new Date();
+          }
+          scope.processCardUpdate();
+        }
+
+        scope.showNameEdit = function() {
+          _toggleNameEdit();
+          $timeout(function() {
+            _focusInput('#name-input');
+          })
+        }
+
+
+        scope.showDescriptionEdit = function() {
+          _toggleDescriptionEdit();
+          $timeout(function() {
+            _focusInput('#desc-input');
+          })
         }
 
         var _toggleNameEdit = function() {

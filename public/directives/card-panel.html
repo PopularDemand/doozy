@@ -1,6 +1,7 @@
 <div class="card-panel" ng-mouseover='toggleDescription()' draggable>
   <div class="panel panel-default">
     <div class="panel-body">
+    <span class="clickable delete-x pull-right" ng-click='deleteCard()'>X</span>
       <h5 data-toggle="modal" data-target="#card-{{card.id}}-modal">{{ card.name }}</h5>
       <!-- <p class="card-description" ng-show='showDescription'>{{ card.description }}</p> -->
     </div>

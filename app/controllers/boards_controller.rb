@@ -1,6 +1,6 @@
 class BoardsController < ApplicationController
 
-  before_action :set_board, only: [:show, :update]
+  before_action :set_board, only: [:show, :update, :destroy]
 
   def index
     @boards = current_user.boards
@@ -38,6 +38,13 @@ class BoardsController < ApplicationController
       respond_to do |format|
         format.json { render json: { errors: @board.errors.full_messages }, status: 422 }
       end
+    end
+  end
+
+  def destroy
+    @board.delete
+    respond_to do |format|
+      format.json { render json: @board }
     end
   end
 
