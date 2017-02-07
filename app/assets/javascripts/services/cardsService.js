@@ -39,9 +39,7 @@ doozy.factory('cardsService',  ['listsService', 'Restangular', '$q', function(li
     }
     var card = _findCard(prevParams)
     var newParams = angular.copy(card, {})
-    card.remove();
-    listsService.removeCard(card);
-    console.log(newParams)
+    deleteCard(card);
 
     newParams.listId = newList;
     createCard(newParams);
@@ -57,6 +55,11 @@ doozy.factory('cardsService',  ['listsService', 'Restangular', '$q', function(li
       angular.copy(prevCard, card);
       return error.data;
     })
+  }
+
+  var deleteCard = function(card) {
+    card.remove();
+    listsService.removeCard(card);
   }
 
   // var _updateCards = function(prevParams, newList) {
@@ -83,6 +86,7 @@ doozy.factory('cardsService',  ['listsService', 'Restangular', '$q', function(li
     getCardsFromLists: getCardsFromLists,
     createCard: createCard,
     updateCard: updateCard,
+    deleteCard: deleteCard,
     changeList: changeList
   }
 
