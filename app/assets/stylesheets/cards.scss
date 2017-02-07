@@ -1,3 +1,12 @@
-// Place all the styles related to the cards controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.card-grid {
+  margin-top: 15px;
+  .card-panel {
+    &:hover {
+      box-shadow: 1px 3px 8px #BBB;
+    }
+    .card-desc.ng-hide-add, .card-desc.ng-hide-remove {
+      transition: all 0.5s linear;
+    }
+  }
+}

@@ -6,11 +6,18 @@ doozy.directive('cardPanel', ['cardsService', '$timeout',
       scope: {
         card: '='
       },
-      link: function(scope) {
+      link: function(scope, element) {
         scope.nameEditShowing = false;
         scope.descriptionEditShowing = false;
         scope.addMemberShowing = false;
         scope.newCard = angular.copy(scope.card, {});
+        scope.showDescription = false;
+
+        // element.click(function() {
+        //   _toggleDescription();
+        // });
+        // element.on('mouseout', _toggleDescription);
+
 
         scope.toggleCardCompletion = function() {
           if (scope.card.completed) {
@@ -79,6 +86,11 @@ doozy.directive('cardPanel', ['cardsService', '$timeout',
           scope.descriptionEditShowing = false;
           scope.addMemberShowing = false;
           scope.newMember = '';
+        }
+
+        scope.toggleDescription = function() {
+          console.log(scope.showDescription)
+          scope.showDescription = !scope.showDescription;
         }
       }
     }

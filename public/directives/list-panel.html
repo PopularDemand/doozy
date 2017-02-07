@@ -8,14 +8,13 @@
 
 
   <div class="panel-body">
-    <div class="card-grid">
-
-      <div class="row">
-        <div class="col-xs-12">
-          <a ng-click='toggleNewCardForm()' ng-if='!newCardFormShowing' class='clickable block-link'>&#43; New Card</a>
-        </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <a ng-click='toggleNewCardForm()' ng-if='!newCardFormShowing' class='clickable block-link'>&#43; New Card</a>
       </div>
+    </div>
 
+    <div class="card-grid">
       <form name='newCardForm' ng-submit='createCard()' ng-if='newCardFormShowing'>
         <input type="text" ng-model='newCard.name' placeholder='name'>
         <input type="text" ng-model='newCard.description' placeholder='description'>

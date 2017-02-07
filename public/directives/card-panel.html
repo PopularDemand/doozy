@@ -1,7 +1,13 @@
-<div class="card">
-
-  <h4 data-toggle="modal" data-target="#card-{{card.id}}-modal">{{ card.name }}</h4>
-
+<div class="card-panel" ng-mouseover='toggleDescription()'>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h5 data-toggle="modal" data-target="#card-{{card.id}}-modal">{{ card.name }}</h5>
+      <p class="card-description" ng-show='showDescription'>{{ card.description }}</p>
+    </div>
+  </div>
+</div>
+{{ showDescription }}
+<div class='card-modal'>
   <div class="modal fade" id="card-{{card.id}}-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
