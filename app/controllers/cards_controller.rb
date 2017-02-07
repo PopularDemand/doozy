@@ -1,5 +1,7 @@
 class CardsController < ApplicationController
 
+  before_action :set_card, only: [:update, :destroy]
+
   def index
     @list = List.find(params[:list_id])
     @cards = @list.cards
@@ -23,7 +25,7 @@ class CardsController < ApplicationController
   end
 
   def update
-    @card = Card.find(params[:id])
+    
     @card.update_membership(params[:relevant_member])
     @card.change_list(params[:list_id])
     if @card.update_attributes(card_params)
@@ -37,9 +39,20 @@ class CardsController < ApplicationController
     end
   end
 
+  def destroy
+    @card.delete
+    respond_to do |format|
+      format.json { render json: @card }
+    end
+  end
+
   private
 
   def card_params
     params.require(:card).permit(:name, :description, :priority, :completed, :relevant_member, :list_id)
+  end
+
+  def set_card
+    @card = Card.find(params[:id])
   end
 end

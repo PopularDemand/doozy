@@ -46,7 +46,7 @@ doozy.directive('droppable', function() {
           this.classList.remove('over');
 
           var item = document.getElementById(e.dataTransfer.getData('Text'));
-          this.appendChild(item);
+          // this.appendChild(item);
 
           scope.drop(item);
 

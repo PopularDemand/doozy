@@ -1,4 +1,4 @@
-doozy.factory('cardsService', ['Restangular', '$q', function(Restangular, $q) {
+doozy.factory('cardsService',  ['listsService', 'Restangular', '$q', function(listsService, Restangular, $q) {
   var _cards = {};
 
   var getCardsFromList = function(listId) {
@@ -38,11 +38,13 @@ doozy.factory('cardsService', ['Restangular', '$q', function(Restangular, $q) {
       list_id: prevList
     }
     var card = _findCard(prevParams)
+    var newParams = angular.copy(card, {})
+    card.remove();
+    listsService.removeCard(card);
+    console.log(newParams)
 
-    card.list_id = newList;
-    card.save().then(function(results) {
-      _updateCards(prevParams, newList);
-    })
+    newParams.listId = newList;
+    createCard(newParams);
   }
 
   var updateCard = function(params) {
@@ -57,12 +59,15 @@ doozy.factory('cardsService', ['Restangular', '$q', function(Restangular, $q) {
     })
   }
 
-  var _updateCards = function(prevParams, newList) {
-    // console.log(prevParams)
-    // console.log(_cards[prevParams.list_id])
-    getCardsFromList(newList)
-    getCardsFromList(prevParams.list_id)
-  }
+  // var _updateCards = function(prevParams, newList) {
+  //   console.log('before', _cards[newList])
+  //   getCardsFromList(newList)
+  //   console.log('after', _cards[newList])
+
+  //   console.log('before', _cards[prevParams.list_id])
+  //   getCardsFromList(prevParams.list_id)
+  //   console.log('after', _cards[prevParams.list_id])
+  // }
 
   var _findCard = function(params) {
     var listId = params.list_id;
