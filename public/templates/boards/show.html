@@ -13,10 +13,16 @@
     <input type='text' ng-model='newBoard.description' ng-if='updateBoardDescShowing' ng-blur='processBoardUpdate()' class='form-control board-desc-input' id='board-desc'>
   </div>
   
+  <!-- button -->
+  <button class='toggle-options btn pull-right'
+          ng-click='toggleSidebar($event)'>
+          <span class="glyphicon glyphicon-triangle-left"
+                ng-if='!sidebarShowing'></span>
+  </button>
   
   <!-- list-grid -->
   <div class="row">
-    <div class="list-grid">
+    <div class="list-grid col-xs-12">
       <list-panel ng-repeat="list in lists" list='list'></list-panel>
       <div class="list-panel panel panel-default">
       <div class="panel-heading">
@@ -29,6 +35,37 @@
           </form>
         </div>
       </div>
+    </div>
+    
+    <div class="options-sidebar" ng-if='sidebarShowing'>
+      <div class="sidebar-header">
+        <button class='toggle-options btn pull-right'
+              ng-click='toggleSidebar($event)'>
+          <span class="glyphicon glyphicon-triangle-right"
+                ng-if='sidebarShowing'></span>
+        </button>
+        <h2 class="options-header">Details</h2>
+      </div>
+      <hr>
+      <h4 class="options-header">Board:</h4>
+      <p class="options-info">{{ board.title }}</p>
+      <button class="btn leave">Leave</button>
+      <button class="btn delete"
+              ng-click='deleteBoard()'>Delete</button>
+      <hr>
+      <h4 class="options-header">Lists:</h4>
+      <ul class='options-info options-list'>
+        <li ng-repeat='list in board.lists'>{{ list.title }}</li>
+      </ul>
+      <hr>
+      <h4 class="options-header">Members:</h4>
+      <ul class='options-info options-list'>
+        <li ng-repeat='member in board.users'>{{ member.first_name }}</li>
+      </ul>
+      <h4 class="options-header">Recent Activity:</h4>
+      <ul class='options-info options-list'>
+        <li ng-repeat='member in board.memebers'>{{ member.first_name }}</li>
+      </ul>
     </div>
   </div>
 </div>

@@ -18,11 +18,12 @@ body {
 
 .drag {
   background-color: red;
+  cursor: grabbing;
 }
 
 .over {
   // a draggable item has entered
-  background-color: red;
+  background-color: #eaf4f7;
 }
 
 .delete-x {

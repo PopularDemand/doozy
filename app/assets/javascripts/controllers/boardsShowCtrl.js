@@ -1,4 +1,4 @@
-doozy.controller('BoardsShowCtrl', ['$scope', 'board', 'lists', 'cards', 'boardsService', 'listsService', '$timeout', function($scope, board, lists, cards, boardsService, listsService, $timeout) {
+doozy.controller('BoardsShowCtrl', ['$scope', 'board', 'lists', 'cards', 'boardsService', 'listsService', '$timeout', '$state', function($scope, board, lists, cards, boardsService, listsService, $timeout, $state) {
 
   $scope.board = board;
   $scope.newBoard = angular.copy($scope.board, {});
@@ -6,8 +6,16 @@ doozy.controller('BoardsShowCtrl', ['$scope', 'board', 'lists', 'cards', 'boards
   $scope.cards = cards;
   $scope.updateBoardTitleShowing = false;
   $scope.updateBoardDescShowing = false;
+  $scope.sidebarShowing = false;
 
   listsService.addCardsToLists(cards);
+
+  $scope.deleteBoard = function() {
+    boardsService.deleteBoard($scope.board)
+      .then(function() {
+        $state.go('index');
+      })
+  }
 
   $scope.createList = function() {
     $scope.newList.boardId = $scope.board.id;
@@ -26,6 +34,11 @@ doozy.controller('BoardsShowCtrl', ['$scope', 'board', 'lists', 'cards', 'boards
     $timeout(function() {
       _focusInput('#board-desc');
     })
+  }
+
+  $scope.toggleSidebar = function($event) {
+    $event.target.blur();
+    $scope.sidebarShowing = !$scope.sidebarShowing;
   }
   
   $scope._toggleUpdateBoardTitle = function() {

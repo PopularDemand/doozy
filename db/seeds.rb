@@ -46,7 +46,7 @@ List.all.each do |list|
   CARDS_PER_LIST.times do
     card = list.cards.create(
       name: Faker::GameOfThrones.character,
-      description: Faker::StarWars.wookie_sentence,
+      description: Faker::StarWars.quote,
       priority: Faker::Number.between(1, 5)
     )
     card.members = list.board.users

@@ -55,6 +55,7 @@ doozy.directive('listPanel', ['cardsService', 'listsService', '$timeout', functi
 
       var _clearNewCardForm = function() {
         scope.newCard = {};
+        scope.newCardFormShowing = false;
       }
       
     }

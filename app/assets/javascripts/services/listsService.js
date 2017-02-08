@@ -24,6 +24,12 @@ doozy.factory('listsService', ['Restangular', function(Restangular) {
     }
   }
 
+  var addCard = function(card) {
+    console.log(_lists)
+    var list = _findList({ id: card.list_id })
+    list.cards.push(card);
+  }
+
   var deleteList = function(list) {
     list.remove();
     for(var i = 0; i < _lists.length; i++) {
@@ -34,38 +40,12 @@ doozy.factory('listsService', ['Restangular', function(Restangular) {
     }
   }
 
-  // var swapCard = function(prevList, card) {
-  //   console.log(prevList)
-  //   console.log(_lists)
-  //   for (var i  = 0; i < _lists.length; i++) {
-  //     if (_lists[i].id === prevList) {
-  //       var list = _lists[i]
-  //       console.log('list', list)
-  //       break;
-  //     } else {
-  //       console.log('no list found');
-  //     }
-  //   }
-
-  //   for (var j = 0; j < list.cards.length; j++) {
-  //     if (list.cards[j].id === card.id) {
-  //       var movingCard = list.cards.splice(i, 1);
-  //       console.log('card', movingCard)
-  //       break;
-  //     } else {
-  //       console.log('no card found')
-  //     }
-  //   }
-  //   if (!_lists[card.list_id]) _lists[card.list_id] = []
-
-  //   _lists[card.list_id].push(movingCard);
-  // }
-
   var createList = function(listParams) {
     var boardId = listParams.boardId;
     return Restangular.one('boards', boardId).all('lists').post({ list: listParams })
       .then(function(list) {
-        _lists.push(list)
+        list.cards = [];
+        _lists.push(list);
       })
   }
 
@@ -104,6 +84,7 @@ doozy.factory('listsService', ['Restangular', function(Restangular) {
     createList: createList,
     updateList: updateList,
     deleteList: deleteList,
-    removeCard: removeCard
+    removeCard: removeCard,
+    addCard: addCard
   }
 }])

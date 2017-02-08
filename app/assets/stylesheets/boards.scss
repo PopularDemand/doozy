@@ -62,7 +62,52 @@
   }
 }
 
+.options-sidebar {
+  position: absolute;
+  width: 300px;
+  height: 100%;
+  top: 0;
+  left: calc(100% - 300px);
+  margin: 0;
+  padding-left: 15px;
+  background-color: #FFF;
+  border-left: 1px solid #DDD;
+  border-top: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;
+  border-radius: 15px 0 0 15px;;
+  button.leave {
+    background-color: #38587B;
+    color: #FFF;
+    &:hover {
+      background-color: #366;
+    }
+  }
+  button.delete {
+    background-color: #525252;
+    color: #FFF;
+    &:hover {
+      background-color: #F00;
+    }
+  }
+  hr:first-child {
+    margin-top: 0;
+  }
+  .options-info {
+    color: #444;
+    font-size: 14px;
+  }
+  .options-header {
+    font-style: uppercase;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .options-list {
+    list-style: none;
+  }
+}
+
 .list-grid {
+  position: relative;
   display: inline-flex;
   flex-wrap: nowrap;
   overflow-x: scroll;
