@@ -24,9 +24,5 @@ doozy.directive('draggable', function() {
       },
       false
       );
-
-    el.extractResource = function() {
-      console.log('worked')
-    }
   }
 });
