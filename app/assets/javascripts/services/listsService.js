@@ -25,8 +25,8 @@ doozy.factory('listsService', ['Restangular', function(Restangular) {
   }
 
   var addCard = function(card) {
-    console.log(_lists)
-    var list = _findList({ id: card.list_id })
+    // console.log(_lists)
+    var list = _findList({ id: card.list_id });
     list.cards.push(card);
   }
 

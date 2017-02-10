@@ -8,6 +8,8 @@ class Card < ApplicationRecord
     through: :cardsusers,
     source: :user
 
+  attr_accessor :relevant_member
+
   def update_membership(id)
     return if !id
 

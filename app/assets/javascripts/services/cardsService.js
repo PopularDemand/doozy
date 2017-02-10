@@ -25,11 +25,8 @@ doozy.factory('cardsService',  ['listsService', 'Restangular', '$q', function(li
       .all('cards')
       .post({ card: cardParams })
       .then(function(response) {
-        // listsService.addCard(response);
-        if (!_cards[listId]) {
-          _cards[listId] = [];
-        }
-        _cards[listId].push(response);
+        // this also adds card to _cards
+        listsService.addCard(response);
       })
   }
 
@@ -38,12 +35,14 @@ doozy.factory('cardsService',  ['listsService', 'Restangular', '$q', function(li
       id: cardId,
       list_id: prevList
     }
-    var card = _findCard(prevParams)
-    var newParams = angular.copy(card, {})
-    deleteCard(card);
-    newParams.listId = newList;
-    
-    createCard(newParams);
+    var card = _findCard(prevParams);
+    var newParams = angular.copy(card, {});
+    deleteCard(card).then(function(response) {
+      newParams.listId = newList;
+      createCard(newParams);
+    }, function(error) {
+      console.error(error)
+    });
   }
 
   var updateCard = function(params) {
@@ -59,8 +58,9 @@ doozy.factory('cardsService',  ['listsService', 'Restangular', '$q', function(li
   }
 
   var deleteCard = function(card) {
-    card.remove();
-    listsService.removeCard(card);
+    return card.remove().then(function() {
+      listsService.removeCard(card);
+    }, function(error) { console.log(error) });
   }
 
   var _findCard = function(params) {
