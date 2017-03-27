@@ -2,7 +2,7 @@
 
   <div class="panel-heading">
     <span class="clickable delete-x pull-right" ng-click='deleteList()'>X</span>
-    <h4 ng-if='!updateListFormShowing' ng-click='showUpdateList()'>{{ list.title }} {{ list.id }}</h4>
+    <h4 ng-if='!updateListFormShowing' ng-click='showUpdateList()'>{{ list.title }}</h4>
 
     <input type="text" id='updateListInput' ng-model='newList.title' ng-if='updateListFormShowing' ng-blur='processListUpdate()' class='form-control'>
   </div>
