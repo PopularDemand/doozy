@@ -15,7 +15,7 @@ class CardsController < ApplicationController
     @card = @list.cards.build(card_params)
     if @card.save
       respond_to do |format|
-        format.json { render json: @card }
+        format.json { render json: @card.to_json(include: [:members, {list: { only: [:title], include: :members }} ]) }
       end
     else
       respond_to do |format|
@@ -25,7 +25,6 @@ class CardsController < ApplicationController
   end
 
   def update
-    
     @card.update_membership(params[:relevant_member])
     @card.change_list(params[:list_id])
     if @card.update_attributes(card_params)

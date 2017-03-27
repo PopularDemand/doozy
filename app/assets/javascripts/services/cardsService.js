@@ -25,6 +25,7 @@ doozy.factory('cardsService',  ['listsService', 'Restangular', '$q', function(li
       .all('cards')
       .post({ card: cardParams })
       .then(function(response) {
+        if (!_cards[listId]) _cards[listId] = [response];
         // this also adds card to _cards
         listsService.addCard(response);
       })
@@ -60,6 +61,9 @@ doozy.factory('cardsService',  ['listsService', 'Restangular', '$q', function(li
   var deleteCard = function(card) {
     return card.remove().then(function() {
       listsService.removeCard(card);
+      _cards[card.list_id].filter(function(cardInList) {
+        return cardInList.id !== card.id;
+      })
     }, function(error) { console.log(error) });
   }
 
@@ -70,7 +74,6 @@ doozy.factory('cardsService',  ['listsService', 'Restangular', '$q', function(li
         return _cards[listId][i];
       }
     }
-    return 'unable to locate card'
   }
 
   return {

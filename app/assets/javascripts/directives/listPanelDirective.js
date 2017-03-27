@@ -15,6 +15,7 @@ doozy.directive('listPanel', ['cardsService', 'listsService', '$timeout', functi
       scope.moveCard = function(card) {
         var cardId = parseInt(card.id);
         var prevList = parseInt(card.dataset.parentId)
+        console.log(card)
         cardsService.changeList(cardId, prevList, scope.list.id);
       }
 
